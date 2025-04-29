@@ -29,7 +29,10 @@
 
                 <div class="mb-3">
                     <label class="form-label text-white">Rol</label>
-                    <input type="text" name="rol" class="form-control" value="{{ $user->rol }}" required>
+                    <select name="rol" class="form-select" required>
+                        <option value="jugador" {{ $user->rol == 'jugador' ? 'selected' : '' }}>Jugador</option>
+                        <option value="admin" {{ $user->rol == 'admin' ? 'selected' : '' }}>Administrador</option>
+                    </select>
                 </div>
 
                 <div class="mb-3">
