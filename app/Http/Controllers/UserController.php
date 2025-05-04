@@ -62,9 +62,15 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, $id)
     {
-        $user->update($request->all()); 
+        $user = User::findOrFail($id);
+
+        // Solo permitir cambiar el estado si el usuario está "activo"
+        /*($user->estado !== 'activo' && $request->has('estado')) {
+            return redirect()->back()->with('error', 'No puedes cambiar el estado si el usuario está inactivo.');
+        }*/
+        $user->update($request->all());
         return redirect('/user');
     }
 
