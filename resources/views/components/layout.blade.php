@@ -70,8 +70,8 @@
                             <a href="element.html" class="dropdown-item">Cara o cruz</a>
                         </div>
                     </div>
-                    <a href="widget.html" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Promociones</a>
-                    <a href="form.html" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Apuestas hechas</a>
+                    <a href=# class="nav-item nav-link"><i class="fa fa-th me-2"></i>Promociones</a>
+                    <a href="{{ url('/apuestas') }}" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Apuestas hechas</a>
                     <a href="#" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Consultar saldo</a>
                     <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Chat</a>
                     <div class="nav-item dropdown">

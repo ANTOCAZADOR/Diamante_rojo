@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApuestaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Models\User;
@@ -15,6 +16,9 @@ Route::get('/', function () {
 // Recursos del usuario
 Route::resource('user', UserController::class);
 
+//Rutas para las apuestas 
+Route::resource('apuestas', ApuestaController::class);
+
 // Middleware para rutas protegidas por login y verificación de correo
 Route::middleware([
     'auth:sanctum',
@@ -26,8 +30,11 @@ Route::middleware([
     })->name('dashboard');
 });
 
+
+
+//Estos estan comentados por si se ocupan en el futuro. 
 // Ruta para enviar correo de prueba
-Route::get('/probar-correo', function () {
+/*Route::get('/probar-correo', function () {
     $user = User::first(); // Cambia si deseas probar con otro usuario específico
     if ($user) {
         $user->notify(new EventoCasino());
