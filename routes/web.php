@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ApuestaController;
+use App\Http\Controllers\JuegoController;
 use App\Http\Controllers\PremioController;
 use App\Http\Controllers\TransaccionController;
 use Illuminate\Support\Facades\Route;
@@ -26,6 +27,9 @@ Route::resource('premios', PremioController::class);
 
 //Ruta para las transacciones
 Route::resource('transacciones', TransaccionController::class); 
+
+//Ruta para los juegos 
+Route::resource('juegos', JuegoController::class); 
 
 // Middleware para rutas protegidas por login y verificación de correo
 Route::middleware([

@@ -68,6 +68,7 @@
                             <a href="button.html" class="dropdown-item">Ruleta simplificada</a>
                             <a href="typography.html" class="dropdown-item">Dado virtual</a>
                             <a href="element.html" class="dropdown-item">Cara o cruz</a>
+                            <a href="/juegos" class="dropdown-item">Crear Juego</a>
                         </div>
                     </div>
                     <a href=# class="nav-item nav-link"><i class="fa fa-th me-2"></i>Promociones</a>
@@ -80,7 +81,7 @@
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Otros</a>
                         <div class="dropdown-menu bg-transparent border-0">
                             <a href="/premios" class="dropdown-item">Premios</a>
-                            <a href="/transacciones" class="dropdown-item">Transacciones</a>
+                            <a href="/transaccion" class="dropdown-item">Transacciones</a>
                             <a href="404.html" class="dropdown-item">404 Error</a>
                             <a href="blank.html" class="dropdown-item">Blank Page</a>
                         </div>
