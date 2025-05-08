@@ -72,13 +72,15 @@
                     </div>
                     <a href=# class="nav-item nav-link"><i class="fa fa-th me-2"></i>Promociones</a>
                     <a href="{{ url('/apuestas') }}" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Apuestas hechas</a>
-                    <a href="#" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Consultar saldo</a>
+                    @auth
+                    <a href="{{ route('user.show', auth()->user()) }}" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Consultar saldo</a>
+                    @endauth
                     <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Chat</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Otros</a>
                         <div class="dropdown-menu bg-transparent border-0">
                             <a href="/premios" class="dropdown-item">Premios</a>
-                            <a href="signup.html" class="dropdown-item">Sign Up</a>
+                            <a href="/transacciones" class="dropdown-item">Transacciones</a>
                             <a href="404.html" class="dropdown-item">404 Error</a>
                             <a href="blank.html" class="dropdown-item">Blank Page</a>
                         </div>
