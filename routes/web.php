@@ -3,6 +3,7 @@
 use App\Http\Controllers\ApuestaController;
 use App\Http\Controllers\JuegoController;
 use App\Http\Controllers\PremioController;
+use App\Http\Controllers\SesionJuegoController;
 use App\Http\Controllers\TransaccionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -30,6 +31,9 @@ Route::resource('transacciones', TransaccionController::class);
 
 //Ruta para los juegos 
 Route::resource('juegos', JuegoController::class); 
+
+//Ruta para la sesión de juegos
+Route::resource('sesionjuegos', SesionJuegoController::class);
 
 // Middleware para rutas protegidas por login y verificación de correo
 Route::middleware([

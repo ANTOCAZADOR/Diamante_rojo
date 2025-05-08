@@ -82,7 +82,7 @@
                         <div class="dropdown-menu bg-transparent border-0">
                             <a href="/premios" class="dropdown-item">Premios</a>
                             <a href="/transaccion" class="dropdown-item">Transacciones</a>
-                            <a href="404.html" class="dropdown-item">404 Error</a>
+                            <a href="/sesionjuegos" class="dropdown-item">Ver la sesión</a>
                             <a href="blank.html" class="dropdown-item">Blank Page</a>
                         </div>
                     </div>
