@@ -66,7 +66,7 @@
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Juegos</a>
                         <div class="dropdown-menu bg-transparent border-0">
                             <a href="button.html" class="dropdown-item">Ruleta simplificada</a>
-                            <a href="typography.html" class="dropdown-item">Dado virtual</a>
+                            <a href="/juego/dado" class="dropdown-item">Dado virtual</a>
                             <a href="element.html" class="dropdown-item">Cara o cruz</a>
                             <a href="/juegos" class="dropdown-item">Crear Juego</a>
                         </div>

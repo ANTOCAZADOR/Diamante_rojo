@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ApuestaController;
+use App\Http\Controllers\DadoController;
 use App\Http\Controllers\JuegoController;
 use App\Http\Controllers\PremioController;
 use App\Http\Controllers\SesionJuegoController;
@@ -22,6 +23,9 @@ Route::resource('user', UserController::class);
 
 //Rutas para las apuestas 
 Route::resource('apuestas', ApuestaController::class);
+/*Route::middleware('auth')->group(function () {
+    Route::get('/apuestas', [ApuestaController::class, 'index']);
+});*/
 
 //Rutas para los premios 
 Route::resource('premios', PremioController::class); 
@@ -34,6 +38,12 @@ Route::resource('juegos', JuegoController::class);
 
 //Ruta para la sesión de juegos
 Route::resource('sesionjuegos', SesionJuegoController::class);
+
+//Rutas para el dado
+Route::middleware(['auth'])->group(function () {
+    Route::get('/juego/dado', [DadoController::class, 'index'])->name('dado.index');
+    Route::post('/juego/dado', [DadoController::class, 'jugar'])->name('dado.jugar');
+});
 
 // Middleware para rutas protegidas por login y verificación de correo
 Route::middleware([

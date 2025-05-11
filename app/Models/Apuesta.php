@@ -11,4 +11,9 @@ class Apuesta extends Model
         'resultado',
         'ganancia',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
