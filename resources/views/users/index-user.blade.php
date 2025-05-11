@@ -39,7 +39,7 @@
                     <h3 class="mb-0 text-white">Lista de Usuarios</h3>
 
                     @if (auth()->user()->rol === 'admin')
-                        <a href="{{ route('user.create') }}" class="btn btn-primary">Agregar Usuario</a>
+                        <a href="{{ route('user.create') }}" class="btn btn-primary">Crear Usuario</a>
                     @endif
                 </div>
 

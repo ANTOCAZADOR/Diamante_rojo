@@ -26,8 +26,8 @@
                     <label for="fecha" class="form-label">Fecha</label>
                     <input type="datetime-local" name="fecha" id="fecha" class="form-control" value="{{ $transaccion->fecha->format('Y-m-d\TH:i') }}" required>
                 </div>
-                <button type="submit" class="btn btn-primary">Actualizar</button>
-                <a href="{{ route('transacciones.index') }}" class="btn btn-secondary">Cancelar</a>
+                <button type="submit" class="btn btn-warning">Actualizar Transacción</button>
+                <a href="{{ route('transacciones.index') }}" class="btn btn-danger">Cancelar</a>
             </form>
         </div>
     </div>

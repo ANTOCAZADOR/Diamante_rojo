@@ -25,8 +25,8 @@
                     <label for="fecha" class="form-label">Fecha</label>
                     <input type="datetime-local" name="fecha" id="fecha" class="form-control" required>
                 </div>
-                <button type="submit" class="btn btn-primary">Guardar</button>
-                <a href="{{ route('transacciones.index') }}" class="btn btn-secondary">Cancelar</a>
+                <button type="submit" class="btn btn-success">Guardar</button>
+                <a href="{{ route('transacciones.index') }}" class="btn btn-warning">Cancelar</a>
             </form>
         </div>
     </div>

@@ -45,6 +45,7 @@
                 </div>-->
 
                 <button type="submit" class="btn btn-success">Crear Usuario</button>
+                <a href="{{ route('user.index') }}" class="btn btn-warning">Cancelar</a>
             </form>
         </div>
     </div>

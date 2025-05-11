@@ -31,7 +31,7 @@
             </div>
 
             <button type="submit" class="btn btn-success">Guardar</button>
-            <a href="{{ route('premios.index') }}" class="btn btn-light">Cancelar</a>
+            <a href="{{ route('premios.index') }}" class="btn btn-warning">Cancelar</a>
         </form>
     </div>
 </div>

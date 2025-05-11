@@ -49,6 +49,7 @@
                 </div>
 
                 <button type="submit" class="btn btn-warning">Actualizar Usuario</button>
+                <a href="{{ route('user.index') }}" class="btn btn-danger">Cancelar</a>
             </form>
         </div>
     </div>

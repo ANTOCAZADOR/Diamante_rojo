@@ -53,7 +53,7 @@ class PremioController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
         $premio = Premio::findOrFail($id);
         return view('premios.edit-premio', compact('premio')); 

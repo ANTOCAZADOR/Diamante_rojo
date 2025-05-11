@@ -2,11 +2,12 @@
     <div class="container-fluid pt-4 px-4">
         <div class="bg-secondary rounded p-4">
             <div class="d-flex justify-content-between mb-4">
-                <h3 class="mb-0">Transacciones</h3>
-                <a href="{{ route('transacciones.create') }}" class="btn btn-primary">Nueva Transacción</a>
+                <h3 class="mb-0 text-white">Transacciones</h3>
+                <a href="{{ route('transacciones.create') }}" class="btn btn-primary">Crear Transacción</a>
             </div>
+
             <div class="table-responsive">
-                <table class="table text-start align-middle table-bordered table-hover mb-0">
+                <table class="table table-dark table-striped">
                     <thead>
                         <tr class="text-white">
                             <th>ID</th>

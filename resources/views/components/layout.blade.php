@@ -81,7 +81,7 @@
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Otros</a>
                         <div class="dropdown-menu bg-transparent border-0">
                             <a href="/premios" class="dropdown-item">Premios</a>
-                            <a href="/transaccion" class="dropdown-item">Transacciones</a>
+                            <a href="/transacciones" class="dropdown-item">Transacciones</a>
                             <a href="/sesionjuegos" class="dropdown-item">Ver la sesión</a>
                             <a href="blank.html" class="dropdown-item">Blank Page</a>
                         </div>

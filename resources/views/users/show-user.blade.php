@@ -31,7 +31,8 @@
                 <strong class="text-white">Fecha de Registro:</strong> {{ $user->fechaRegistro }}
             </div>
 
-            <a href="{{ route('user.index') }}" class="btn btn-primary">Volver a la lista</a>
+            <a href="{{ route('user.index') }}" class="btn btn-primary">Volver</a>
+            <a href="{{ route('user.edit', $user) }}" class="btn btn-warning">Editar</a>
         </div>
     </div>
 </x-layout>

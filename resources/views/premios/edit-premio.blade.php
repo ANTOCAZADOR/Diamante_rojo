@@ -32,8 +32,8 @@
                 <input type="datetime-local" name="fecha_reclamado" class="form-control bg-dark text-white" value="{{ $premio->fecha_reclamado ? \Carbon\Carbon::parse($premio->fecha_reclamado)->format('Y-m-d\TH:i') : '' }}">
             </div>
 
-            <button type="submit" class="btn btn-primary">Actualizar</button>
-            <a href="{{ route('premios.index') }}" class="btn btn-light">Cancelar</a>
+            <button type="submit" class="btn btn-warning">Actualizar Premio</button>
+            <a href="{{ route('premios.index') }}" class="btn btn-danger">Cancelar</a>
         </form>
     </div>
 </div>
