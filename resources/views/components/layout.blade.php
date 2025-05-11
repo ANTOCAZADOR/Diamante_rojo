@@ -71,7 +71,7 @@
                             <a href="/juegos" class="dropdown-item">Crear Juego</a>
                         </div>
                     </div>
-                    <a href=# class="nav-item nav-link"><i class="fa fa-th me-2"></i>Promociones</a>
+                    <a href=/recargar-saldo class="nav-item nav-link"><i class="fa fa-th me-2"></i>Recargar Saldo</a>
                     <a href="{{ url('/apuestas') }}" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Apuestas hechas</a>
                     @auth
                     <a href="{{ route('user.show', auth()->user()) }}" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Consultar saldo</a>
@@ -83,7 +83,7 @@
                             <a href="/premios" class="dropdown-item">Premios</a>
                             <a href="/transacciones" class="dropdown-item">Transacciones</a>
                             <a href="/sesionjuegos" class="dropdown-item">Ver la sesión</a>
-                            <a href="blank.html" class="dropdown-item">Blank Page</a>
+                            <a href="/recargar-saldo" class="dropdown-item">Promociones</a>
                         </div>
                     </div>
                 </div>

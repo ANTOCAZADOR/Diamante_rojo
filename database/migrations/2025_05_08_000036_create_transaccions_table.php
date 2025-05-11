@@ -19,7 +19,6 @@ return new class extends Migration
             $table->decimal('monto', 10, 2); // Puedes ajustar la precisión si lo deseas
             $table->string('descripcion');
             $table->dateTime('fecha')->nullable();
-            
             $table->timestamps();
         });
         

@@ -64,24 +64,46 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+         // Buscar el usuario por su ID
         $user = User::findOrFail($id);
 
-        // Solo permitir cambiar el estado si el usuario está "activo"
-        /*($user->estado !== 'activo' && $request->has('estado')) {
-            return redirect()->back()->with('error', 'No puedes cambiar el estado si el usuario está inactivo.');
-        }*/
+        // Obtener el saldo anterior
+        $saldoAnterior = $user->saldo;
+
+        // Actualizar los datos del usuario con los nuevos valores
         $user->update($request->all());
-        return redirect('/user');
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        $user = User::findOrFail($id);
-        $user->delete();
+        // Obtener el nuevo saldo después de la actualización
+        $nuevoSaldo = $user->saldo;
 
-        return redirect('/user')->with('success', 'Usuario eliminado correctamente.');
+        // Calcular la diferencia entre el saldo anterior y el nuevo saldo
+        $diferencia = $nuevoSaldo - $saldoAnterior;
+
+        // Si hubo un cambio en el saldo, registrar una transacción de tipo 'ajuste'
+        if ($diferencia != 0) {
+            $transaccion = new \App\Models\Transaccion();
+            $transaccion->tipo = 'ajuste';
+            $transaccion->monto = abs($diferencia);
+            $transaccion->descripcion = $diferencia > 0 
+                ? 'Ajuste positivo de saldo' 
+                : 'Ajuste negativo de saldo';
+            $transaccion->fecha = now();
+            $transaccion->user_id = $user->id; // Asociar al usuario correspondiente
+            $transaccion->save();
+        }
+
+        // Redirigir al usuario con un mensaje de éxito
+        return redirect('/user')->with('success', 'Usuario actualizado correctamente.');
+        }
+
+        /**
+         * Remove the specified resource from storage.
+         */
+        public function destroy(string $id)
+        {
+            $user = User::findOrFail($id);
+            $user->delete();
+
+            return redirect('/user')->with('success', 'Usuario eliminado correctamente.');
+        }
     }
-}

@@ -4,6 +4,7 @@ use App\Http\Controllers\ApuestaController;
 use App\Http\Controllers\DadoController;
 use App\Http\Controllers\JuegoController;
 use App\Http\Controllers\PremioController;
+use App\Http\Controllers\SaldoController;
 use App\Http\Controllers\SesionJuegoController;
 use App\Http\Controllers\TransaccionController;
 use Illuminate\Support\Facades\Route;
@@ -44,6 +45,17 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/juego/dado', [DadoController::class, 'index'])->name('dado.index');
     Route::post('/juego/dado', [DadoController::class, 'jugar'])->name('dado.jugar');
 });
+
+//Para el saldo 
+Route::get('/recargar-saldo', function () {
+    return view('recargar');
+})->middleware('auth')->name('saldo.recargar.vista');
+Route::post('/saldo/retirar', [SaldoController::class, 'retirar'])->name('saldo.retirar');
+Route::view('/saldo/retirar', 'saldo.retirar')->middleware('auth')->name('vista.retirar');
+
+
+Route::post('/recargar-saldo', [SaldoController::class, 'recargar'])->name('saldo.recargar');
+
 
 // Middleware para rutas protegidas por login y verificación de correo
 Route::middleware([
