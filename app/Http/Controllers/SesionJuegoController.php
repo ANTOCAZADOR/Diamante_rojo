@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Juego;
 use App\Models\SesionJuego;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -22,6 +23,7 @@ class SesionJuegoController extends Controller
      */
     public function create()
     {
+        $juegos = Juego::where('activo', true)->get();
         return view('sesionjuegos.create-sesionjuego');
     }
 
@@ -31,18 +33,19 @@ class SesionJuegoController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'inicioSesion' => 'required|date',
-            'finSesion' => 'required|date|after:inicioSesion',
-            'totalApostado' => 'required|numeric',
-            'totalGanado' => 'required|numeric',
+        'juego_id' => 'required|exists:juegos,id',
+        'totalApostado' => 'required|numeric',
+        'totalGanado' => 'required|numeric',
         ]);
 
-        SesionJuego::create($request->only([
-            'inicioSesion',
-            'finSesion',
-            'totalApostado',
-            'totalGanado',
-        ]));
+        $sesion = new SesionJuego();
+        $sesion->inicioSesion = now();
+        $sesion->finSesion = now()->addHour(); // Puedes ajustarlo según tu lógica
+        $sesion->totalApostado = $request->totalApostado;
+        $sesion->totalGanado = $request->totalGanado;
+        $sesion->user_id = auth()->id();
+        $sesion->juego_id = $request->juego_id;
+        $sesion->save();
         
 
         return redirect()->route('sesionjuegos.index');
@@ -89,27 +92,30 @@ class SesionJuegoController extends Controller
     //para ver que funcione la llave foranea: 
     public function crearSesion()
     {
-        $user = User::find(1); // o auth()->user() si el usuario está autenticado
-
         $sesion = new SesionJuego();
         $sesion->inicioSesion = now();
         $sesion->finSesion = now()->addHour();
         $sesion->totalApostado = 500;
         $sesion->totalGanado = 1200;
+        $sesion->user_id = 1; // Asegúrate que este usuario existe
+        $sesion->juego_id = 1; // Este es el ID del juego que debe existir en la tabla `juegos`
 
-        $user->sesiones()->save($sesion);
+        $sesion->save();
 
-        return "Sesión creada para el usuario {$user->name}";
+        return "Sesión creada con éxito";
     }
+
 
     public function mostrarSesiones($userId)
     {
         $user = User::findOrFail($userId);
 
         foreach ($user->sesiones as $sesion) {
-            echo "ID sesión: {$sesion->id}, Apostado: {$sesion->totalApostado}, Ganado: {$sesion->totalGanado}<br>";
+            $juegoId = $sesion->juego ? $sesion->juego->id : 'Sin juego';
+            echo "ID sesión: {$sesion->id}, Juego ID: {$juegoId}, Apostado: {$sesion->totalApostado}, Ganado: {$sesion->totalGanado}<br>";
         }
     }
+
 
     public function mostrarUsuarioSesion($sesionId)
     {

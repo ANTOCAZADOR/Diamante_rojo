@@ -12,4 +12,10 @@ class Juego extends Model
        'tipo', 
        'activo',
     ];
+
+    public function sesiones()
+    {
+        return $this->hasMany(SesionJuego::class);
+    }
+
 }

@@ -17,4 +17,10 @@ class SesionJuego extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function juego()
+    {
+        return $this->belongsTo(Juego::class);
+    }
+
 }
