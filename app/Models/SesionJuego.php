@@ -12,5 +12,9 @@ class SesionJuego extends Model
         'totalApostado',
         'totalGanado',
     ];
-    
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

@@ -75,6 +75,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Apuesta::class);
     }
 
+    public function sesiones()
+    {
+        return $this->hasMany(SesionJuego::class);
+    }
+
     // Modelo User.php
     public function setSaldoAttribute($value)
     {

@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('sesion_juegos', function (Blueprint $table) {
             $table->id(); // ID autoincremental
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); // Llave foránea
             $table->dateTime('inicioSesion'); // Fecha y hora de inicio de la sesión
             $table->dateTime('finSesion'); // Fecha y hora de fin de la sesión
             $table->decimal('totalApostado', 10, 2); // Total apostado en la sesión

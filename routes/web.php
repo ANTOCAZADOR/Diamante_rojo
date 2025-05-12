@@ -43,6 +43,11 @@ Route::resource('juegos', JuegoController::class);
 //Ruta para la sesión de juegos
 Route::resource('sesionjuegos', SesionJuegoController::class);
 
+Route::get('/sesiones/crear', [SesionJuegoController::class, 'crearSesion']);
+Route::get('/sesiones/usuario/{id}', [SesionJuegoController::class, 'mostrarSesiones']);
+Route::get('/sesiones/{id}/usuario', [SesionJuegoController::class, 'mostrarUsuarioSesion']);
+
+
 //Rutas para el dado
 Route::middleware(['auth'])->group(function () {
     Route::get('/juego/dado', [DadoController::class, 'index'])->name('dado.index');

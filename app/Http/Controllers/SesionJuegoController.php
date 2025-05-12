@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\SesionJuego;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class SesionJuegoController extends Controller
@@ -83,5 +84,38 @@ class SesionJuegoController extends Controller
         $sesionJuego = SesionJuego::findOrFail($id); 
         $sesionJuego->delete(); 
         return redirect('/sesionjuegos');
+    }
+
+    //para ver que funcione la llave foranea: 
+    public function crearSesion()
+    {
+        $user = User::find(1); // o auth()->user() si el usuario está autenticado
+
+        $sesion = new SesionJuego();
+        $sesion->inicioSesion = now();
+        $sesion->finSesion = now()->addHour();
+        $sesion->totalApostado = 500;
+        $sesion->totalGanado = 1200;
+
+        $user->sesiones()->save($sesion);
+
+        return "Sesión creada para el usuario {$user->name}";
+    }
+
+    public function mostrarSesiones($userId)
+    {
+        $user = User::findOrFail($userId);
+
+        foreach ($user->sesiones as $sesion) {
+            echo "ID sesión: {$sesion->id}, Apostado: {$sesion->totalApostado}, Ganado: {$sesion->totalGanado}<br>";
+        }
+    }
+
+    public function mostrarUsuarioSesion($sesionId)
+    {
+        $sesion = SesionJuego::findOrFail($sesionId);
+        $usuario = $sesion->user;
+
+        return "La sesión pertenece a: {$usuario->name} {$usuario->apellido}";
     }
 }
