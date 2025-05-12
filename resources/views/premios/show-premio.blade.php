@@ -16,6 +16,10 @@
             </div>
 
             <div class="mb-3">
+                <strong class="text-white">Monto:</strong> ${{ number_format($premio->monto, 2) }}
+            </div>
+
+            <div class="mb-3">
                 <strong class="text-white">Fecha Reclamado:</strong> {{ $premio->fecha_reclamado ?? 'No reclamado' }}
             </div>
 

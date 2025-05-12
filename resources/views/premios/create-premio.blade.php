@@ -26,6 +26,12 @@
             </div>
 
             <div class="mb-3">
+                <label class="form-label text-white">Monto</label>
+                <input type="number" name="monto" class="form-control bg-dark text-white" required step="0.01" min="0">
+                <small class="text-white">Ingrese el monto en el que se asignará el premio</small>
+            </div>
+
+            <div class="mb-3">
                 <label class="form-label text-white">Fecha Reclamado (opcional)</label>
                 <input type="datetime-local" name="fecha_reclamado" class="form-control bg-dark text-white">
             </div>
@@ -33,6 +39,7 @@
             <button type="submit" class="btn btn-success">Guardar</button>
             <a href="{{ route('premios.index') }}" class="btn btn-warning">Cancelar</a>
         </form>
+
     </div>
 </div>
 </x-layout>

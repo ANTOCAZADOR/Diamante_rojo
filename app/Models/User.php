@@ -75,4 +75,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Apuesta::class);
     }
 
+    // Modelo User.php
+    public function setSaldoAttribute($value)
+    {
+        $this->attributes['saldo'] = number_format($value, 2, '.', ''); // Asegura el formato correcto
+    }
+
+
 }

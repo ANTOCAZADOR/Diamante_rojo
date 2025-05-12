@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Premio;
 use Illuminate\Http\Request;
+use App\Models\Transaccion;
+use Illuminate\Support\Facades\Auth;
 
 class PremioController extends Controller
 {
@@ -30,14 +32,20 @@ class PremioController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255', 
-            'descripcion' => 'required|string', 
-            'fechaObtenido' => 'nullable|date',
-        ]); 
+            'name' => 'required|string|max:255',
+            'descripcion' => 'required|string',
+            'monto' => 'required|numeric|min:0',
+            'fecha_reclamado' => 'nullable|date',
+        ]);
 
-        $premio = Premio::create($request->all()); 
+        Premio::create([
+            'name' => $request->name,
+            'descripcion' => $request->descripcion,
+            'monto' => $request->monto, // <-- Aquí debe ir el valor
+            'fechaObtenido' => $request->fecha_reclamado, // asegúrate del nombre correcto en la DB
+        ]);
 
-        return redirect('/premios'); 
+        return redirect()->route('premios.index')->with('success', 'Premio creado correctamente.');
     }
 
     /**

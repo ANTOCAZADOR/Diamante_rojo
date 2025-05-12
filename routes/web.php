@@ -30,6 +30,9 @@ Route::resource('apuestas', ApuestaController::class);
 
 //Rutas para los premios 
 Route::resource('premios', PremioController::class); 
+Route::post('/reclamar-premio/{premioId}', [SaldoController::class, 'reclamarPremio'])->name('saldo.reclamar');
+
+
 
 //Ruta para las transacciones
 Route::resource('transacciones', TransaccionController::class); 

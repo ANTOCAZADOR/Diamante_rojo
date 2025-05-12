@@ -9,6 +9,8 @@ class Premio extends Model
     protected $fillable = [
         'name',
         'descripcion',
+        'monto',
         'fechaObtenido',
+        'fecha_reclamado', // FALTABA 
     ];
 }

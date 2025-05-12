@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('descripcion');
+            $table->decimal('monto', 10, 2)->default(0);
+            $table->timestamp('fecha_reclamado')->nullable();
             $table->timestamp('fechaObtenido')->nullable(); // Nueva columna
             $table->timestamps();
         });

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Transaccion;
+use App\Models\Premio;
 
 class SaldoController extends Controller
 {
@@ -60,5 +61,38 @@ class SaldoController extends Controller
         $user->save();
 
         return redirect('/user')->with('success', 'Retiro realizado correctamente.');
+    }
+
+    public function reclamarPremio($premioId)
+    {
+        $user = auth()->user();
+        $premio = Premio::find($premioId);
+
+        if (!$premio) {
+            return back()->with('error', 'El premio no existe.');
+        }
+
+        if ($premio->fechaObtenido) {
+            return back()->with('error', 'Este premio ya ha sido reclamado.');
+        }
+
+        // Crear la transacción de premio
+        $transaccion = new Transaccion();
+        $transaccion->tipo = 'premio';
+        $transaccion->monto = $premio->monto; // monto positivo
+        $transaccion->descripcion = 'Reclamo de premio: ' . $premio->name;
+        $transaccion->fecha = now();
+        $transaccion->user_id = $user->id;
+        $transaccion->save();
+
+        // Actualizar el saldo del usuario (sumar)
+        $user->saldo += $premio->monto;
+        $user->save();
+
+        // Marcar el premio como reclamado
+        $premio->fechaObtenido = now();
+        $premio->save();
+
+        return redirect('/user')->with('success', '¡Premio reclamado exitosamente!');
     }
 }

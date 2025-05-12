@@ -17,6 +17,7 @@
                             <th>ID</th>
                             <th>Nombre</th>
                             <th>Descripción</th>
+                            <th>Saldo del Premio</th> <!-- Mostrar saldo del premio -->
                             <th>Fecha Reclamado</th>
                             <th>Acciones</th>
                         </tr>
@@ -27,7 +28,8 @@
                                 <td>{{ $premio->id }}</td>
                                 <td>{{ $premio->name }}</td>
                                 <td>{{ $premio->descripcion }}</td>
-                                <td>{{ $premio->fecha_reclamado ?? 'No reclamado' }}</td>
+                                <td>${{ number_format($premio->monto, 2) }}</td>
+                                <td>{{ $premio->fechaObtenido ?? 'No reclamado' }}</td>
                                 <td>
                                     <a href="{{ route('premios.show', $premio) }}" class="btn btn-sm btn-info">Ver</a>
                                     <a href="{{ route('premios.edit', $premio) }}" class="btn btn-sm btn-warning">Editar</a>
@@ -35,6 +37,16 @@
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn btn-sm btn-danger" onclick="return confirm('¿Seguro que deseas eliminar este premio?')">Eliminar</button>
+                                    </form>
+
+                                    <!-- Botón para reclamar el premio -->
+                                    <form action="{{ route('saldo.reclamar', $premio->id) }}" method="POST" class="d-inline mt-1">
+                                        @csrf
+                                        @if(auth()->user()->saldo >= $premio->monto && is_null($premio->fechaObtenido))
+                                            <button type="submit" class="btn btn-sm btn-success">Reclamar</button>
+                                        @else
+                                            <button type="button" class="btn btn-sm btn-secondary" disabled>Reclamado / Sin saldo</button>
+                                        @endif
                                     </form>
                                 </td>
                             </tr>

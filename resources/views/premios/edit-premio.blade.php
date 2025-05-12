@@ -28,6 +28,11 @@
             </div>
 
             <div class="mb-3">
+                <label class="form-label text-white">Monto</label>
+                <input type="number" name="monto" class="form-control bg-dark text-white" value="{{ $premio->monto }}" required step="0.01" min="0">
+            </div>
+
+            <div class="mb-3">
                 <label class="form-label text-white">Fecha Reclamado</label>
                 <input type="datetime-local" name="fecha_reclamado" class="form-control bg-dark text-white" value="{{ $premio->fecha_reclamado ? \Carbon\Carbon::parse($premio->fecha_reclamado)->format('Y-m-d\TH:i') : '' }}">
             </div>
