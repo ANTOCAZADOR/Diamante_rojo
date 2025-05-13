@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Models\User;
 use App\Notifications\EventoCasino;
+use App\Notifications\SaldoBajo;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 
@@ -75,6 +76,27 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+//Comprobar el saldo
+Route::get('/probar-saldo-bajo', function () {
+    $user = User::first(); // Cambia si deseas probar con otro usuario específico
+    if ($user) {
+        if ($user->saldo < 50) {
+            $user->notify(new SaldoBajo($user->saldo));
+            return '📧 Notificación de saldo bajo enviada a ' . $user->email;
+        } else {
+            return '✔️ El saldo del usuario es suficiente.';
+        }
+    } else {
+        return '❌ No hay usuarios en la base de datos.';
+    }
+})->middleware(['auth']);
+
+
+
+
+
+
 
 
 

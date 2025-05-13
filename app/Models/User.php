@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Notifications\SaldoBajo;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -86,5 +87,14 @@ class User extends Authenticatable implements MustVerifyEmail
         $this->attributes['saldo'] = number_format($value, 2, '.', ''); // Asegura el formato correcto
     }
 
+    public function verificarSaldo()
+    {
+        $user = User::find(1); // Obtén al usuario. Puede ser el que esté logueado o el que elijas
 
+        if ($user->saldo < 50) {
+            $user->notify(new SaldoBajo($user->saldo));
+        }
+
+        return 'Verificación realizada.';
+    }
 }
