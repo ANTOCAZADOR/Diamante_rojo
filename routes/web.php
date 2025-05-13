@@ -4,6 +4,7 @@ use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\ApuestaController;
 use App\Http\Controllers\DadoController;
 use App\Http\Controllers\JuegoController;
+use App\Http\Controllers\PayPalController;
 use App\Http\Controllers\PremioController;
 use App\Http\Controllers\SaldoController;
 use App\Http\Controllers\SesionJuegoController;
@@ -98,7 +99,11 @@ Route::get('/probar-saldo-bajo', function () {
 Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('google.login');
 Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
 
-
+// routes/web.php
+Route::get('/paypal/payment', [PayPalController::class, 'handlePayment'])->name('paypal.payment');
+Route::get('/paypal/success', [PayPalController::class, 'paymentSuccess'])->name('paypal.success');
+Route::get('/paypal/cancel', [PayPalController::class, 'paymentCancel'])->name('paypal.cancel');
+Route::view('/paypal', 'paypal.index')->name('paypal.index');
 
 
 
