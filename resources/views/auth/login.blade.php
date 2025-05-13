@@ -44,5 +44,9 @@
                 </x-button>
             </div>
         </form>
+        <a href="{{ route('google.login') }}" class="btn btn-danger w-100">
+            <i class="fab fa-google me-1"></i> Iniciar sesión con Google
+        </a>
+
     </x-authentication-card>
 </x-guest-layout>

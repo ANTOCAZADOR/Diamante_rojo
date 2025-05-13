@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\ApuestaController;
 use App\Http\Controllers\DadoController;
 use App\Http\Controllers\JuegoController;
@@ -93,7 +94,9 @@ Route::get('/probar-saldo-bajo', function () {
 })->middleware(['auth']);
 
 
-
+//Rutas de google 
+Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('google.login');
+Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
 
 
 

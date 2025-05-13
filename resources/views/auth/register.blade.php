@@ -56,5 +56,9 @@
                 </x-button>
             </div>
         </form>
+
+        <a href="{{ route('google.login') }}" class="btn btn-info">
+                Iniciar sesión con Google
+        </a>
     </x-authentication-card>
 </x-guest-layout>
