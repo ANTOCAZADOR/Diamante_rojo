@@ -42,10 +42,10 @@
                                     <!-- Botón para reclamar el premio -->
                                     <form action="{{ route('saldo.reclamar', $premio->id) }}" method="POST" class="d-inline mt-1">
                                         @csrf
-                                        @if(auth()->user()->saldo >= $premio->monto && is_null($premio->fechaObtenido))
+                                        @if(is_null($premio->fechaObtenido))
                                             <button type="submit" class="btn btn-sm btn-success">Reclamar</button>
                                         @else
-                                            <button type="button" class="btn btn-sm btn-secondary" disabled>Reclamado / Sin saldo</button>
+                                            <button type="button" class="btn btn-sm btn-secondary" disabled>Reclamado</button>
                                         @endif
                                     </form>
                                 </td>

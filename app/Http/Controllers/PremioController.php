@@ -6,6 +6,8 @@ use App\Models\Premio;
 use Illuminate\Http\Request;
 use App\Models\Transaccion;
 use Illuminate\Support\Facades\Auth;
+use App\Notifications\NuevoPremioNotification;
+
 
 class PremioController extends Controller
 {
@@ -38,12 +40,18 @@ class PremioController extends Controller
             'fecha_reclamado' => 'nullable|date',
         ]);
 
-        Premio::create([
+        $premio = Premio::create([
             'name' => $request->name,
             'descripcion' => $request->descripcion,
             'monto' => $request->monto, // <-- Aquí debe ir el valor
             'fechaObtenido' => $request->fecha_reclamado, // asegúrate del nombre correcto en la DB
         ]);
+
+         // Notificar a todos los usuarios
+        $usuarios = \App\Models\User::all();
+        foreach ($usuarios as $usuario) {
+            $usuario->notify(new NuevoPremioNotification($premio));
+        }
 
         return redirect()->route('premios.index')->with('success', 'Premio creado correctamente.');
     }
