@@ -22,18 +22,22 @@
                     <input type="email" name="email" class="form-control" value="{{ $user->email }}" required>
                 </div>
 
-                <div class="mb-3">
-                    <label class="form-label text-white">Saldo</label>
-                    <input type="number" step="0.01" name="saldo" class="form-control" value="{{ $user->saldo }}" required>
-                </div>
+                @if (auth()->user()->rol === 'admin')
+                    <div class="mb-3">
+                        <label class="form-label text-white">Saldo</label>
+                        <input type="number" step="0.01" name="saldo" class="form-control" value="{{ $user->saldo }}" required>
+                    </div>
+                @endif
 
-                <div class="mb-3">
-                    <label class="form-label text-white">Rol</label>
-                    <select name="rol" class="form-select" required>
-                        <option value="jugador" {{ $user->rol == 'jugador' ? 'selected' : '' }}>Jugador</option>
-                        <option value="admin" {{ $user->rol == 'admin' ? 'selected' : '' }}>Administrador</option>
-                    </select>
-                </div>
+                @if (auth()->user()->rol === 'admin')
+                    <div class="mb-3">
+                        <label class="form-label text-white">Rol</label>
+                        <select name="rol" class="form-select" required>
+                            <option value="jugador" {{ $user->rol == 'jugador' ? 'selected' : '' }}>Jugador</option>
+                            <option value="admin" {{ $user->rol == 'admin' ? 'selected' : '' }}>Administrador</option>
+                        </select>
+                    </div>
+                @endif
 
                 <div class="mb-3">
                     <label class="form-label text-white">Password</label>

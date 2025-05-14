@@ -32,7 +32,9 @@
             </div>
 
             <a href="{{ route('user.index') }}" class="btn btn-primary">Volver</a>
-            <a href="{{ route('user.edit', $user) }}" class="btn btn-warning">Editar</a>
+            @if (auth()->user()->rol === 'admin')
+                <a href="{{ route('user.edit', $user) }}" class="btn btn-warning">Editar</a>
+            @endif
             <a href="{{ route('vista.retirar') }}" class="btn btn-danger">Retirar saldo</a>
         </div>
     </div>

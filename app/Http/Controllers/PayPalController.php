@@ -59,6 +59,9 @@ class PayPalController extends Controller
 
     public function paymentCancel()
     {
+        if (auth()->user()->rol !== 'admin') {
+            abort(403, 'No tienes permiso para paypal.');
+        }
         return 'Pago cancelado 😥';
     }
 }

@@ -3,7 +3,9 @@
         <div class="bg-secondary rounded p-4">
             <div class="d-flex justify-content-between mb-4">
                 <h3 class="mb-0 text-white">Lista de Premios</h3>
+                @if (auth()->user()->rol === 'admin')
                 <a href="{{ route('premios.create') }}" class="btn btn-primary">Crear Premio</a>
+                @endif
             </div>
 
             @if(session('success'))
@@ -32,13 +34,15 @@
                                 <td>{{ $premio->fechaObtenido ?? 'No reclamado' }}</td>
                                 <td>
                                     <a href="{{ route('premios.show', $premio) }}" class="btn btn-sm btn-info">Ver</a>
+                                    @if (auth()->user()->rol === 'admin')
                                     <a href="{{ route('premios.edit', $premio) }}" class="btn btn-sm btn-warning">Editar</a>
+                                    
                                     <form action="{{ route('premios.destroy', $premio) }}" method="POST" class="d-inline">
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn btn-sm btn-danger" onclick="return confirm('¿Seguro que deseas eliminar este premio?')">Eliminar</button>
                                     </form>
-
+                                    @endif
                                     <!-- Botón para reclamar el premio -->
                                     <form action="{{ route('saldo.reclamar', $premio->id) }}" method="POST" class="d-inline mt-1">
                                         @csrf

@@ -28,7 +28,9 @@
             </div>
 
             <a href="{{ route('premios.index') }}" class="btn btn-primary">Volver</a>
+            @if (auth()->user()->rol === 'admin')
             <a href="{{ route('premios.edit', $premio)}}" class="btn btn-warning">Editar</a>
+            @endif
 
         </div>
     </div>

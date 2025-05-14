@@ -14,6 +14,9 @@ class SesionJuegoController extends Controller
      */
     public function index()
     {
+        if (auth()->user()->rol !== 'admin') {
+            abort(403, 'No tienes permiso.');
+        }
         $sesiones = SesionJuego::all();
         return view('sesionjuegos.index-sesionjuego', compact('sesiones'));
     }
@@ -23,6 +26,9 @@ class SesionJuegoController extends Controller
      */
     public function create()
     {
+        if (auth()->user()->rol !== 'admin') {
+            abort(403, 'No tienes permiso.');
+        }
         $juegos = Juego::where('activo', true)->get();
         return view('sesionjuegos.create-sesionjuego');
     }
@@ -65,6 +71,9 @@ class SesionJuegoController extends Controller
      */
     public function edit($id)
     {
+        if (auth()->user()->rol !== 'admin') {
+            abort(403, 'No tienes permiso.');
+        }
         $sesionJuego = SesionJuego::findOrFail($id); 
         return view('sesionjuegos.edit-sesionjuego', compact('sesionJuego'));   
     }

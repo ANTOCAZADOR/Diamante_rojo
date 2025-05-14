@@ -43,7 +43,7 @@ class DadoController extends Controller
         $user->save();
 
         Apuesta::create([
-            'user_id' => $user->id,
+            'user_id' => auth()->id(),
             'montoApostado' => $monto,
             'resultado' => $resultado,
             'ganancia' => $ganancia,

@@ -24,7 +24,9 @@
             </div>
 
             <a href="{{ route('apuestas.index') }}" class="btn btn-primary">Volver</a>
+            @if (auth()->user()->rol === 'admin')
             <a href="{{ route('apuestas.edit', $apuesta) }}" class="btn btn-warning">Editar</a>
+            @endif
         </div>
     </div>
 </x-layout>

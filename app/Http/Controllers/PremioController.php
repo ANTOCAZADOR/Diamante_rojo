@@ -25,6 +25,9 @@ class PremioController extends Controller
      */
     public function create()
     {
+        if (auth()->user()->rol !== 'admin') {
+            abort(403, 'No tienes permiso.');
+        }
         return view('premios.create-premio');
     }
 
@@ -71,6 +74,9 @@ class PremioController extends Controller
      */
     public function edit($id)
     {
+        if (auth()->user()->rol !== 'admin') {
+            abort(403, 'No tienes permiso.');
+        }
         $premio = Premio::findOrFail($id);
         return view('premios.edit-premio', compact('premio')); 
     }

@@ -65,10 +65,14 @@
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Juegos</a>
                         <div class="dropdown-menu bg-transparent border-0">
-                            <a href="button.html" class="dropdown-item">Ruleta simplificada</a>
+                            <a href="#" class="dropdown-item">Ruleta simplificada</a>
                             <a href="/juego/dado" class="dropdown-item">Dado virtual</a>
-                            <a href="element.html" class="dropdown-item">Cara o cruz</a>
-                            <a href="/juegos" class="dropdown-item">Crear Juego</a>
+                            <a href="#" class="dropdown-item">Cara o cruz</a>
+                            @auth
+                                @if (auth()->user()->rol === 'admin')
+                                    <a href="/juegos" class="dropdown-item">Crear Juego</a>
+                                @endif
+                            @endauth
                         </div>
                     </div>
                     <a href=/recargar-saldo class="nav-item nav-link"><i class="fa fa-th me-2"></i>Recargar Saldo</a>
@@ -76,13 +80,21 @@
                     @auth
                     <a href="{{ route('user.show', auth()->user()) }}" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Consultar saldo</a>
                     @endauth
-                    <a href="/paypal" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Paypal</a>
+                    @auth
+                        @if (auth()->user()->rol === 'admin')
+                            <a href="/paypal" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Paypal</a>
+                        @endif
+                    @endauth
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Otros</a>
                         <div class="dropdown-menu bg-transparent border-0">
                             <a href="/premios" class="dropdown-item">Premios</a>
                             <a href="/transacciones" class="dropdown-item">Transacciones</a>
-                            <a href="/sesionjuegos" class="dropdown-item">Ver la sesión</a>
+                            @auth
+                                @if (auth()->user()->rol === 'admin')
+                                    <a href="/sesionjuegos" class="dropdown-item">Ver la sesión</a>
+                                @endif
+                            @endauth
                             <a href="/recargar-saldo" class="dropdown-item">Promociones</a>
                         </div>
                     </div>

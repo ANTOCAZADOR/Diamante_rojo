@@ -20,6 +20,9 @@ class UserController extends Controller
      */
     public function create()
     {
+        if (auth()->user()->rol !== 'admin') {
+            abort(403, 'No tienes permiso para editar usuarios.');
+        }
         return view('users.create-user'); 
     }
 
@@ -55,6 +58,9 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
+        if (auth()->user()->rol !== 'admin') {
+            abort(403, 'No tienes permiso.');
+        }
         $user = User::findOrFail($id);
         return view('users.edit-user', compact('user')); 
     }

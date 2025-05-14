@@ -21,6 +21,9 @@ class TransaccionController extends Controller
      */
     public function create()
     {
+        if (auth()->user()->rol !== 'admin') {
+            abort(403, 'No tienes permiso.');
+        }
         return view('transacciones.create-transaccion');
     }
 
@@ -55,6 +58,9 @@ class TransaccionController extends Controller
      */
     public function edit(string $id)
     {
+        if (auth()->user()->rol !== 'admin') {
+            abort(403, 'No tienes permiso.');
+        }
         $transaccion = Transaccion::findOrFail($id);
         return view('transacciones.edit-transaccion', compact ('transaccion')); 
     }

@@ -34,20 +34,21 @@
                     <a href="{{ route('register') }}" class="btn btn-success">Registrarse</a>
                 </div>
             @else
+
+                @if (auth()->user()->rol === 'admin')
                 <!-- Encabezado para usuarios logueados -->
                 <div class="d-flex justify-content-between mb-4">
                     <h3 class="mb-0 text-white">Lista de Usuarios</h3>
-
-                    @if (auth()->user()->rol === 'admin')
                         <a href="{{ route('user.create') }}" class="btn btn-primary">Crear Usuario</a>
-                    @endif
                 </div>
+                @endif
 
                 <!-- Mensaje de éxito -->
                 @if (session('success'))
                     <div class="alert alert-success">{{ session('success') }}</div>
                 @endif
 
+                @if (auth()->user()->rol === 'admin')
                 <!-- Tabla de usuarios -->
                 <div class="table-responsive">
                     <table class="table table-dark table-striped">
@@ -75,9 +76,8 @@
                                     <td>{{ $user->estado }}</td>
                                     <td class="d-flex">
                                         <a href="{{ route('user.show', $user) }}" class="btn btn-info btn-sm me-2">Ver</a>
-
-                                        @if (auth()->user()->rol === 'admin')
                                             <a href="{{ route('user.edit', $user) }}" class="btn btn-warning btn-sm me-2">Editar</a>
+                                        @if (auth()->user()->rol === 'admin')
                                             <form action="{{ route('user.destroy', $user) }}" method="POST" onsubmit="return confirm('¿Seguro que quieres eliminar este usuario?');">
                                                 @csrf
                                                 @method('DELETE')
@@ -90,6 +90,41 @@
                         </tbody>
                     </table>
                 </div>
+                @else
+                    <!-- Tabla para usuario normal con su propia información -->
+                    <h4 class="text-white mt-5 mb-3">Tu información de cuenta</h4>
+                    <div class="table-responsive">
+                        <table class="table table-dark table-striped">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombre</th>
+                                    <th>Apellido</th>
+                                    <th>Email</th>
+                                    <th>Saldo</th>
+                                    <th>Rol</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{{ auth()->user()->id }}</td>
+                                    <td>{{ auth()->user()->name }}</td>
+                                    <td>{{ auth()->user()->apellido }}</td>
+                                    <td>{{ auth()->user()->email }}</td>
+                                    <td>${{ number_format(auth()->user()->saldo, 2) }}</td>
+                                    <td>{{ ucfirst(auth()->user()->rol) }}</td>
+                                    <td>{{ auth()->user()->estado }}</td>
+                                    <td class="d-flex">
+                                        <a href="{{ route('user.show', auth()->user()) }}" class="btn btn-info btn-sm me-2">Ver</a>
+                                        <a href="{{ route('user.edit', auth()->user()) }}" class="btn btn-warning btn-sm">Editar</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                @endif
             @endguest
         </div>
     </div>

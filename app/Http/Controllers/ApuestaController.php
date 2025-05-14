@@ -10,9 +10,15 @@ class ApuestaController extends Controller
     /**
      * Display a listing of the resource.
      */
+
     public function index()
     {
-        $apuestas = Apuesta::all();
+        if (auth()->user()->rol === 'admin') {
+            $apuestas = Apuesta::with('user')->latest()->get();
+        } else {
+            $apuestas = Apuesta::where('user_id', auth()->id())->latest()->get();
+        }
+
         return view('apuestas.index-apuesta', compact('apuestas'));
     }
 
@@ -21,6 +27,9 @@ class ApuestaController extends Controller
      */
     public function create()
     {
+        if (auth()->user()->rol !== 'admin') {
+            abort(403, 'No tienes permiso para editar apuestas.');
+        }
         return view('apuestas.create-apuesta');
     }
 
@@ -54,6 +63,9 @@ class ApuestaController extends Controller
      */
     public function edit(string $id)
     {
+        if (auth()->user()->rol !== 'admin') {
+            abort(403, 'No tienes permiso para editar apuestas.');
+        }
         $apuesta = Apuesta::findOrFail($id);
         return view('apuestas.edit-apuesta', compact('apuesta'));
     }
